@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Game {
 
-    private static final int START_LENGTH = 10;
+    private static final int START_LENGTH = 2;
     private static final int START_POSITION = Canvas.GRID_SIZE/2;
     private static final int START_APPLE = 5;
 
