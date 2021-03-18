@@ -1,37 +1,28 @@
-import javafx.scene.input.KeyCode;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Canvas extends JPanel  {
+
+    public static final int TILE_SIZE = 20; //size of each tile
+    public static final int GRID_SIZE = 20; // number of tiles on a board
+    public static final int WINDOW_SIZE = TILE_SIZE * GRID_SIZE; //size of window
+
     private Game game;
-    private int posX, posY;
-    private int dirX, dirY;
-    public static int BLOCK_SIZE = 20;
     private Timer timer;
 
-
     public Canvas() {
+        game = new Game();
         initPanel();
+        initTimer();
     }
 
     private void initPanel() {
-        addKeyListener(new Listener());
+        addKeyListener(game. new Input());
         setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(WINDOW_SIZE,WINDOW_SIZE));
         setFocusable(true);
-        setPreferredSize(new Dimension(400,400));
-        initVariables();
-    }
-
-    private void initVariables() {
-        dirX = 1;
-        dirY = 0;
-        posX = posY = 0;
-        initTimer();
     }
 
     private void initTimer(){
@@ -39,41 +30,21 @@ public class Canvas extends JPanel  {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                posX += 20 * dirX;
-                posY += 20 * dirY;
+                game.process();
                 repaint();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 200);
+        timer.scheduleAtFixedRate(task, 0, 100);
     }
-
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.green);
-        g.fillRect(posX,posY, BLOCK_SIZE, BLOCK_SIZE);
-    }
-
-    public class Listener extends KeyAdapter {
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if(key == KeyEvent.VK_W) {
-                dirY = -1;
-                dirX = 0;
-            } else if(key == KeyEvent.VK_A) {
-                dirY = 0;
-                dirX = -1;
-            } else if(key == KeyEvent.VK_S) {
-                dirY = 1;
-                dirX = 0;
-            } else if(key == KeyEvent.VK_D) {
-                dirY = 0;
-                dirX = 1;
-            }
+        g.setColor(Color.RED);
+        g.fillRect(game.getAplX() * TILE_SIZE , game.getAplY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.setColor(Color.GREEN);
+        for(int i = 0; i < game.getTailList().size(); i++) {
+            g.fillRect(game.getTailList().get(i).x * TILE_SIZE,game.getTailList().get(i).y * TILE_SIZE, TILE_SIZE-2, TILE_SIZE-2);
         }
     }
-
-
 }
