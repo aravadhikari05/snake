@@ -64,7 +64,7 @@ public class Canvas extends JPanel  {
 
         g2d.setColor(new Color(15, 5, 5));
         g2d.setStroke(new BasicStroke(TILE_SIZE));
-        g2d.drawRect(10,10, WINDOW_SIZE-20, WINDOW_SIZE-20);
+        g2d.drawRect(TILE_SIZE/2,TILE_SIZE/2, WINDOW_SIZE-TILE_SIZE, WINDOW_SIZE-TILE_SIZE);
 
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("Courier", Font.PLAIN, 20));
