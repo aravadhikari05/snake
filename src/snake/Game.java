@@ -1,15 +1,19 @@
 package snake;
 
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
 
-    private static final int STARTING_LENGTH = 2;
-    private static final int STARTING_POSITION = Canvas.GRID_SIZE/2;
+    private static final int START_LENGTH = 10;
+    private static final int START_POSITION = Canvas.GRID_SIZE/2;
+    private static final int START_APPLE = 5;
 
     private int posX, posY,
                 dirX, dirY,
@@ -18,9 +22,16 @@ public class Game {
 
     private ArrayList<Point> tailList;
 
+    private File beep;
+    private File death;
+
+
     public Game() {
         reset();
-        aplX = aplY = 5;
+        beep = new File("src/res/beep.wav");
+        death = new File("src/res/death.wav");
+
+        aplX = aplY = START_APPLE;
         tailList = new ArrayList<>();
     }
 
@@ -29,8 +40,16 @@ public class Game {
         posY += dirY;
 
         checkApl();
-        manageList();
+        manageLength();
         if(wallCollide() || selfCollide()) {
+            try {
+                if(dirX != 0 || dirY != 0) {
+                    playSound(death);
+
+                }
+            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            }
             reset();
         }
     }
@@ -38,14 +57,20 @@ public class Game {
     public void checkApl() {
         if(posX == aplX && posY == aplY) {
             Random rand = new Random();
+            try {
+                playSound(beep);
+            } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            }
             aplX = rand.nextInt(Canvas.GRID_SIZE);
             aplY = rand.nextInt(Canvas.GRID_SIZE);
+
             tail++;
             score++;
         }
     }
 
-    public void manageList() {
+    public void manageLength() {
         tailList.add(0,new Point(posX, posY));
         while(tailList.size() > tail) {
             tailList.remove(tailList.size()-1);
@@ -66,10 +91,18 @@ public class Game {
     }
 
     private void reset() {
-        tail = STARTING_LENGTH;
-        posX = posY = STARTING_POSITION;
+        tail = START_LENGTH;
+        posX = posY = START_POSITION;
         dirX = dirY = 0;
         score = 0;
+    }
+
+    private void playSound(File file) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        AudioInputStream ais = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(ais);
+        clip.setMicrosecondPosition(0);
+        clip.start();
     }
 
     public class Input extends KeyAdapter{
