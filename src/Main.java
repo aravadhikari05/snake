@@ -7,7 +7,7 @@ public class Main {
     }
 
     public static void initFrame() {
-        JFrame frame = new JFrame("Snake Game");
+        JFrame frame = new JFrame("Snake");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new Canvas());
         frame.setResizable(false);

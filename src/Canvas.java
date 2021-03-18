@@ -40,8 +40,13 @@ public class Canvas extends JPanel  {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Courier", Font.PLAIN, 20));
+        g.drawString("" + game.getScore(), 5 , 20);
+
         g.setColor(Color.RED);
-        g.fillRect(game.getAplX() * TILE_SIZE , game.getAplY() * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.fillRect(game.getAplX() * TILE_SIZE , game.getAplY() * TILE_SIZE, TILE_SIZE-2, TILE_SIZE-2);
+
         g.setColor(Color.GREEN);
         for(int i = 0; i < game.getTailList().size(); i++) {
             g.fillRect(game.getTailList().get(i).x * TILE_SIZE,game.getTailList().get(i).y * TILE_SIZE, TILE_SIZE-2, TILE_SIZE-2);

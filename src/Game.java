@@ -12,15 +12,13 @@ public class Game {
     private int posX, posY,
                 dirX, dirY,
                 aplX, aplY,
-                tail;
+                tail, score;
 
     private ArrayList<Point> tailList;
 
     public Game() {
+        reset();
         aplX = aplY = 5;
-        posX = posY = STARTING_POSITION;
-        tail = STARTING_LENGTH;
-
         tailList = new ArrayList<>();
     }
 
@@ -41,6 +39,7 @@ public class Game {
             aplX = rand.nextInt(Canvas.GRID_SIZE);
             aplY = rand.nextInt(Canvas.GRID_SIZE);
             tail++;
+            score++;
         }
     }
 
@@ -68,6 +67,7 @@ public class Game {
         tail = STARTING_LENGTH;
         posX = posY = STARTING_POSITION;
         dirX = dirY = 0;
+        score = 0;
     }
 
     public class Input extends KeyAdapter{
@@ -101,5 +101,9 @@ public class Game {
 
     public ArrayList<Point> getTailList() {
         return tailList;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
