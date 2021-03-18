@@ -2,11 +2,14 @@
 
 A simple snake game that I made for fun
 
-#### Features
-
 ![screenshot](screenshots/game.png)
 
-Has score, audio, and some color
+#### Features
+
+* Score
+* Audio (plinggg)
+* Grid
+* Colors
 
 #### How to play
 
