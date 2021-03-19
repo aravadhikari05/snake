@@ -1,5 +1,3 @@
-package snake;
-
 import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -30,8 +28,8 @@ public class Game {
 
     public Game() {
         reset();
-        beep = new File("src/res/beep.wav");
-        death = new File("src/res/death.wav");
+        beep = new File("res/beep.wav");
+        death = new File("res/death.wav");
 
         aplX = aplY = START_APPLE;
         tailList = new ArrayList<>();
