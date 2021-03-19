@@ -116,16 +116,16 @@ public class Game {
                 return;
             }
             int key = e.getKeyCode();
-            if(key == KeyEvent.VK_W && dirY != 1) {
+            if((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && dirY != 1) {
                 dirY = -1;
                 dirX = 0;
-            } else if(key == KeyEvent.VK_A && dirX != 1) {
+            } else if((key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) && dirX != 1) {
                 dirY = 0;
                 dirX = -1;
-            } else if(key == KeyEvent.VK_S && dirY != -1) {
+            } else if((key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) && dirY != -1) {
                 dirY = 1;
                 dirX = 0;
-            } else if(key == KeyEvent.VK_D && dirX != -1) {
+            } else if((key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) && dirX != -1) {
                 dirY = 0;
                 dirX = 1;
             } else {
