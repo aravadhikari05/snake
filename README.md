@@ -1,15 +1,8 @@
 # Snake
 
-A simple snake game that I made for fun
+A simple snake game that I made for fun.
 
 ![screenshot](screenshots/game.png)
-
-#### Features
-
-* Score
-* Audio (plinggg)
-* Grid
-* Colors
 
 #### Running
 
@@ -25,13 +18,7 @@ or
 #### How to play
 
 Pretty self-explanatory but: 
-* WASD to move
-* Eating apples makes snake longer and increases score
-* Hitting walls or the snake tail restarts the game 
+* WASD/Arrow Keys to move
+* Eating apples makes snake longer and increases score *(plays a sound)*
+* Hitting walls or the snake tail restarts the game *(also plays a sound)*
 
-#### Features to add
-
-* Arrow Keys
-* Change the atrocious color scheme
-* Fix the bad text quality from running using jar file
-* Add a move queue to make smooooooth
